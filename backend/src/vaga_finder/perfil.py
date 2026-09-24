@@ -8,7 +8,7 @@ from pypdf import PdfReader
 
 from . import prompts
 from .config import ambiente
-from .llm import LLM, obter_llm
+from .llm import LLM, extrair_json, obter_llm
 
 
 class Idioma(BaseModel):
@@ -63,9 +63,23 @@ def gerar_perfil(caminho_pdf: Path | None = None, llm: LLM | None = None) -> Per
         Perfil.model_json_schema(),
         sistema="Você extrai dados de currículos com precisão e não inventa informação.",
     )
-    perfil = Perfil.model_validate(dados)
+    perfil = Perfil.model_validate(_desembrulhar(dados))
+    if not perfil.nome and not perfil.skills and not perfil.experiencias:
+        raise ValueError("O Claude devolveu um perfil vazio. Tente gerar de novo.")
     salvar_perfil(perfil)
     return perfil
+
+
+def _desembrulhar(dados: dict) -> dict:
+    """Aceita respostas embrulhadas como {"perfil": {...}} ou {"perfil": "<json em texto>"}."""
+    campos = set(Perfil.model_fields)
+    if len(dados) == 1 and not campos.intersection(dados):
+        interno = next(iter(dados.values()))
+        if isinstance(interno, str):
+            interno = extrair_json(interno)
+        if isinstance(interno, dict):
+            return interno
+    return dados
 
 
 def carregar_perfil() -> Perfil | None:

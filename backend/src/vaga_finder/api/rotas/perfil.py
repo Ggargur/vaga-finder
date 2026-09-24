@@ -39,7 +39,10 @@ def enviar_curriculo(arquivo: UploadFile, s: Servicos = Depends(servicos)) -> Pe
 def regerar(s: Servicos = Depends(servicos)) -> Perfil:
     if not s.amb.curriculo_path.exists():
         raise HTTPException(404, "Nenhum currículo enviado.")
-    return gerar_perfil(s.amb.curriculo_path, llm=s.llm)
+    try:
+        return gerar_perfil(s.amb.curriculo_path, llm=s.llm)
+    except ValueError as e:
+        raise HTTPException(422, str(e)) from e
 
 
 @router.get("/curriculo")

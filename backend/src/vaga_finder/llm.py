@@ -34,6 +34,23 @@ _PADROES_LIMITE = re.compile(r"usage limit|rate limit|limit reached|quota|too ma
 _trava = threading.Lock()
 
 
+def expandir_schema(schema: dict) -> dict:
+    """Troca os `$ref` por cópias das definições em `$defs`. Com `$ref`, o `claude -p` ignorou o
+    schema e devolveu {"perfil": "<json em texto>"}; schema expandido ele respeita."""
+    defs = schema.get("$defs", {})
+
+    def resolver(no):
+        if isinstance(no, dict):
+            if "$ref" in no:
+                return resolver(defs[no["$ref"].rsplit("/", 1)[-1]])
+            return {k: resolver(v) for k, v in no.items() if k != "$defs"}
+        if isinstance(no, list):
+            return [resolver(x) for x in no]
+        return no
+
+    return resolver(schema)
+
+
 def extrair_json(texto: str) -> dict:
     """Aceita JSON puro ou dentro de ```json ... ```."""
     texto = texto.strip()
@@ -80,7 +97,7 @@ class ClaudeCLI:
             self.binario, "-p",
             "--output-format", "json",
             "--model", modelo,
-            "--json-schema", json.dumps(schema, ensure_ascii=False),
+            "--json-schema", json.dumps(expandir_schema(schema), ensure_ascii=False),
             "--tools", "",
             # sem MCP, CLAUDE.md ou settings: corta ~25k tokens de contexto por chamada
             "--strict-mcp-config",
