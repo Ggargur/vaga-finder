@@ -15,8 +15,11 @@ router = APIRouter(prefix="/rascunhos", tags=["rascunhos"])
 def _completo(s: Servicos, r: Rascunho) -> dict:
     v = s.banco.obter_vaga(r.vaga_id)
     a = s.banco.obter_avaliacao(r.vaga_id)
+    # checagem na hora: o histórico pode ter mudado depois que o rascunho foi criado
+    bloqueado = r.status in ("pendente", "erro") and historico.verificar(s.banco, v, r.destinatario, carregar_config()).bloqueado
     return {
         **r.model_dump(),
+        "bloqueado": bloqueado,
         "palavras": slop_lint.contar_palavras(r.corpo),
         "vaga": {
             "id": v.id, "titulo": v.titulo, "empresa": v.empresa, "url": v.url, "fonte": v.fonte,

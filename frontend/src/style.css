@@ -1,0 +1,97 @@
+@import 'tailwindcss';
+
+/* Tokens de cor: claro por padrão, escuro pelo sistema */
+:root {
+  --fundo: #f6f7f9;
+  --superficie: #ffffff;
+  --superficie-2: #f1f3f5;
+  --borda: #e3e6ea;
+  --texto: #1b1f24;
+  --texto-2: #5b6470;
+  --marca: #0f766e;
+  --marca-forte: #115e59;
+  --marca-suave: #e6f4f2;
+  --ok: #15803d;
+  --ok-suave: #e8f6ed;
+  --atencao: #b45309;
+  --atencao-suave: #fdf3e2;
+  --erro: #b91c1c;
+  --erro-suave: #fdecec;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fundo: #111418;
+    --superficie: #181c21;
+    --superficie-2: #20252b;
+    --borda: #2c323a;
+    --texto: #e7eaee;
+    --texto-2: #9aa3ae;
+    --marca: #2dd4bf;
+    --marca-forte: #5eead4;
+    --marca-suave: #123833;
+    --ok: #4ade80;
+    --ok-suave: #14301f;
+    --atencao: #fbbf24;
+    --atencao-suave: #3a2c10;
+    --erro: #f87171;
+    --erro-suave: #3b1818;
+  }
+}
+
+@theme inline {
+  --color-fundo: var(--fundo);
+  --color-superficie: var(--superficie);
+  --color-superficie-2: var(--superficie-2);
+  --color-borda: var(--borda);
+  --color-texto: var(--texto);
+  --color-texto-2: var(--texto-2);
+  --color-marca: var(--marca);
+  --color-marca-forte: var(--marca-forte);
+  --color-marca-suave: var(--marca-suave);
+  --color-ok: var(--ok);
+  --color-ok-suave: var(--ok-suave);
+  --color-atencao: var(--atencao);
+  --color-atencao-suave: var(--atencao-suave);
+  --color-erro: var(--erro);
+  --color-erro-suave: var(--erro-suave);
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+html,
+body {
+  background: var(--fundo);
+  color: var(--texto);
+}
+
+body {
+  @apply font-sans antialiased;
+}
+
+@layer components {
+  .cartao {
+    @apply rounded-xl border border-borda bg-superficie;
+  }
+  .botao {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-borda bg-superficie px-3.5 py-2 text-sm font-medium text-texto transition hover:bg-superficie-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  /* uso: class="botao primario" / class="botao perigo" */
+  .botao.primario {
+    @apply border-transparent bg-marca text-white hover:bg-marca-forte dark:text-fundo;
+  }
+  .botao.perigo {
+    @apply text-erro hover:bg-erro-suave;
+  }
+  .botao.pequeno {
+    @apply px-2.5 py-1 text-xs;
+  }
+  .campo {
+    @apply w-full rounded-lg border border-borda bg-superficie px-3 py-2 text-sm text-texto outline-none placeholder:text-texto-2 focus:border-marca focus:ring-2 focus:ring-marca/20;
+  }
+  .rotulo {
+    @apply mb-1 block text-xs font-medium tracking-wide text-texto-2 uppercase;
+  }
+  .link {
+    @apply text-marca underline-offset-2 hover:underline;
+  }
+}
