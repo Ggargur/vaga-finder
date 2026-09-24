@@ -1,0 +1,20 @@
+# dados pessoais e credenciais — nunca versionar
+backend/data/
+.env
+*.env
+!.env.example
+
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# node
+node_modules/
+frontend/dist/
+
+# editores
+.vscode/
+.idea/
