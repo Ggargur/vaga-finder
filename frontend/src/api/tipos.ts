@@ -134,6 +134,7 @@ export interface Config {
     himalayas: boolean
     greenhouse: string[]
     lever: string[]
+    ashby: string[]
     paginas: string[]
     linkedin: boolean
     linkedin_local: string

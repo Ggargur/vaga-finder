@@ -7,7 +7,7 @@ import httpx
 
 from ..contato import extrair_emails
 from ..models import Vaga
-from ..texto import consertar_mojibake, html_para_texto
+from ..texto import consertar_mojibake, html_para_texto, normalizar
 
 USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) vaga-finder/0.1 (+https://github.com/Ggargur/vaga-finder)"
 MAX_DESCRICAO = 20_000
@@ -78,3 +78,14 @@ def sem_repetidas(vagas: list[Vaga]) -> list[Vaga]:
             vistas.add(v.id_fonte)
             saida.append(v)
     return saida
+
+
+def casa_termos(vaga: Vaga, termos: list[str]) -> bool:
+    """Para fontes sem busca (Greenhouse, Lever, feed geral): todas as palavras de algum termo
+    aparecem no título ou na descrição."""
+    texto = f" {normalizar(vaga.titulo)} {normalizar(vaga.descricao)} "
+    for termo in termos:
+        palavras = normalizar(termo).split()
+        if palavras and all(f" {p} " in texto for p in palavras):
+            return True
+    return not termos

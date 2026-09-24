@@ -30,6 +30,7 @@ const FONTES: Record<string, string> = {
   himalayas: 'Himalayas',
   greenhouse: 'Greenhouse',
   lever: 'Lever',
+  ashby: 'Ashby',
   pagina: 'Página de carreira',
   linkedin: 'LinkedIn',
 }

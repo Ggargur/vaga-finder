@@ -1,0 +1,74 @@
+{
+ "jobs": [
+  {
+   "id": "262a63ba-5d2d-4b9d-a1ed-b5d92557cd57",
+   "title": "Lead Software Engineer (CloudNetwork) ",
+   "department": "Engineer",
+   "team": "Engineer",
+   "employmentType": "FullTime",
+   "location": "Miami",
+   "secondaryLocations": [
+    {
+     "location": "Virginia",
+     "address": {
+      "postalAddress": {
+       "addressRegion": "Virginia",
+       "addressCountry": "United States",
+       "addressLocality": "Virginia"
+      }
+     }
+    },
+    {
+     "location": "Durham",
+     "address": {
+      "postalAddress": {
+       "addressRegion": "USA",
+       "addressCountry": "United States",
+       "addressLocality": "North Carolina"
+      }
+     }
+    }
+   ],
+   "publishedAt": "2026-09-23T22:18:35.331+00:00",
+   "isListed": true,
+   "isRemote": true,
+   "workplaceType": "Hybrid",
+   "address": {
+    "postalAddress": {
+     "addressRegion": "Florida",
+     "addressCountry": "United States",
+     "addressLocality": "Miami"
+    }
+   },
+   "jobUrl": "https://jobs.ashbyhq.com/nubank/262a63ba-5d2d-4b9d-a1ed-b5d92557cd57",
+   "applyUrl": "https://jobs.ashbyhq.com/nubank/262a63ba-5d2d-4b9d-a1ed-b5d92557cd57/application",
+   "descriptionHtml": "<h1><strong>About Nu</strong></h1><p style=\"min-height:1.5em\">Nu serves more than 140 million customers, guided by a mission to fight complexity and empower people. The company has been leading an industry transformation through innovative products and human-centered services.</p><div style=\"min-height:1.2em;margin-top:0;margin-bottom:0\"> </div><p style=\"min-height:1.5em\">Proprietary technology and data at scale power Nu’s digital platform, built to promote financial access, advancement, and transparency. Its business model thrives on customer love and lower costs, feeding a flywheel of growth and profitability.<br /><br />Visit our<a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://www.nu.com/2026-en\"> Institutional Page</a></p><h3>About the role</h3><p style=\"min-height:1.5em\">Every transaction at Nubank travels across a network before it reaches a customer. As we grow across countries, accounts, regions and hybrid environments, the connectivity layer underneath has to stay fast, segmented, auditable and cheap to run — while never becoming the thing that takes the platform down.</p><div style=\"min-height:1.2em;margin-top:0;margin-bottom:0\"> </div><p style=\"min-height:1.5em\">As a Lead Software Engineer on a Cloud Network platform engineering team, you set and evolve the technical direction for how Nubank connects its cloud, hybrid and on-premises environments. You own problems whose scope spreads across several teams and business units, and you are expected t",
+   "descriptionPlain": "ABOUT NU\n\nNu serves more than 140 million customers, guided by a mission to fight complexity and empower people. The company has been leading an industry transformation through innovative products and human-centered services.\n\n \n\nProprietary technology and data at scale power Nu’s digital platform, built to promote financial access, advancement, and transparency. Its business model thrives on customer love and lower costs, feeding a flywheel of growth and profitability.\n\nVisit our Institutional Page https://www.nu.com/2026-en\n\n\nABOUT THE ROLE\n\nEvery transaction at Nubank travels across a network before it reaches a customer. As we grow across countries, accounts, regions and hybrid environments, the connectivity layer underneath has to stay fast, segmented, auditable and cheap to run — while never becoming the thing that takes the platform down.\n\n \n\nAs a Lead Software Engineer on a Cloud Network platform engineering team, you set and evolve the technical direction for how Nubank connects its cloud, hybrid and on-premises environments. You own problems whose scope spreads across several teams and business units, and you are expected to bring structure to ambiguity rather than wait for it to be resolved for you.\n\n \n\nThis is an IC6 role: you lead through technical depth, design authority and influence rather than direct reports. The goal you own is a cloud network platform that scales with the business, holds up under audit, and gets simpler over time instead of more complex.\n\n\n"
+  },
+  {
+   "id": "88dbd5e0-f337-47eb-bf57-4c278ab42085",
+   "title": "Lead Security Engineer (Threat Detection)",
+   "department": "Engineer",
+   "team": "Engineer",
+   "employmentType": "FullTime",
+   "location": "São Paulo",
+   "secondaryLocations": [],
+   "publishedAt": "2026-09-20T20:17:07.171+00:00",
+   "isListed": true,
+   "isRemote": true,
+   "workplaceType": "Hybrid",
+   "address": {
+    "postalAddress": {
+     "addressRegion": "São Paulo",
+     "addressCountry": "Brazil",
+     "addressLocality": "São Paulo"
+    }
+   },
+   "jobUrl": "https://jobs.ashbyhq.com/nubank/88dbd5e0-f337-47eb-bf57-4c278ab42085",
+   "applyUrl": "https://jobs.ashbyhq.com/nubank/88dbd5e0-f337-47eb-bf57-4c278ab42085/application",
+   "descriptionHtml": "<h1><strong>About Nu</strong></h1><p style=\"min-height:1.5em\">Nu serves more than 140 million customers, guided by a mission to fight complexity and empower people. The company has been leading an industry transformation through innovative products and human-centered services.</p><div style=\"min-height:1.2em;margin-top:0;margin-bottom:0\"> </div><p style=\"min-height:1.5em\">Proprietary technology and data at scale power Nu’s digital platform, built to promote financial access, advancement, and transparency. Its business model thrives on customer love and lower costs, feeding a flywheel of growth and profitability.<br /><br />Visit our<a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://www.nu.com/2026-en\"> Institutional Page</a></p><h3><strong>About the role</strong></h3><p style=\"min-height:1.5em\">You will lead the team that stands between adversaries and 135 million customers. The Threat Detection team proactively hunts for security threats and builds robust, actionable detections to protect both customers and Nubankers — operating as a true Security Operations Center, backed by strong engineering power and intelligence from our internal Threat Intelligence team.</p><p style=\"min-height:1.5em\">As Lead, you own the strategic Threat Detection program end to end: intelligence gathering, threat modeling, detection engineering, AI-assisted analysis, Purple Team validation, incident response and post-incident learning. Your goal is to make sure effective detection ru",
+   "descriptionPlain": "ABOUT NU\n\nNu serves more than 140 million customers, guided by a mission to fight complexity and empower people. The company has been leading an industry transformation through innovative products and human-centered services.\n\n \n\nProprietary technology and data at scale power Nu’s digital platform, built to promote financial access, advancement, and transparency. Its business model thrives on customer love and lower costs, feeding a flywheel of growth and profitability.\n\nVisit our Institutional Page https://www.nu.com/2026-en\n\n\nABOUT THE ROLE\n\nYou will lead the team that stands between adversaries and 135 million customers. The Threat Detection team proactively hunts for security threats and builds robust, actionable detections to protect both customers and Nubankers — operating as a true Security Operations Center, backed by strong engineering power and intelligence from our internal Threat Intelligence team.\n\nAs Lead, you own the strategic Threat Detection program end to end: intelligence gathering, threat modeling, detection engineering, AI-assisted analysis, Purple Team validation, incident response and post-incident learning. Your goal is to make sure effective detection rules, actionable insights and AI-enabled security capabilities are in place and aligned with industry best practices, so that adversary activity across Nubank's environment is identified, prevented and detected before it reaches our customers.\n\nYou'll also build and lead a high-performing team, support "
+  }
+ ],
+ "apiVersion": "1"
+}

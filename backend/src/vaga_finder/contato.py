@@ -16,6 +16,15 @@ _LOCAIS_IGNORADOS = re.compile(
     re.I,
 )
 _DOMINIOS_IGNORADOS = re.compile(r"(^|\.)(example\.(com|org)|exemplo\.com|sentry\.io|domain\.com|email\.com)$", re.I)
+# frases antes do email que indicam contato de acessibilidade, privacidade ou denúncia, não de candidatura
+_CONTEXTO_IGNORADO = re.compile(
+    r"accommodat|disabilit|reasonable adjust|accessib|acessibilidade|privacy|privacidade|"
+    r"lgpd|gdpr|dados pessoais|personal (?:data|information)|data protection|prote[cç][aã]o de dados|"
+    r"fraud|fraude|golpe|scam|phishing|ethics|[eé]tica|whistleblow|den[uú]ncia",
+    re.I,
+)
+_JANELA_CONTEXTO = 180
+
 # endereços com cara de recrutamento vão primeiro
 _LOCAIS_RECRUTAMENTO = re.compile(
     r"(rh|hr|jobs?|careers?|carreiras?|vagas?|talent|talentos?|recruit|recrutamento|selecao|people|pessoas|hiring)",
@@ -45,8 +54,12 @@ def extrair_emails(texto: str) -> list[str]:
     for m in _EMAIL.finditer(texto):
         email = _cortar_palavra_colada(m.group(1)).lower().rstrip(".")
         local, _, dominio = email.partition("@")
+        contexto = texto[max(0, m.start() - _JANELA_CONTEXTO) : m.start()]
+        # só a frase em que o email aparece
+        contexto = re.split(r"[.!?\n]\s", contexto)[-1]
         if (
-            email.endswith(_EXTENSOES_ARQUIVO)
+            _CONTEXTO_IGNORADO.search(contexto)
+            or email.endswith(_EXTENSOES_ARQUIVO)
             or _LOCAIS_IGNORADOS.match(local)
             or _DOMINIOS_IGNORADOS.search(dominio)
             or email in encontrados

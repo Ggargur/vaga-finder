@@ -49,6 +49,7 @@ class ConfigFontes(BaseModel):
     himalayas: bool = True
     greenhouse: list[str] = Field(default_factory=list)  # slugs, ex.: "gitlab"
     lever: list[str] = Field(default_factory=list)  # slugs, ex.: "spotify"
+    ashby: list[str] = Field(default_factory=list)  # slugs, ex.: "nubank"
     paginas: list[str] = Field(default_factory=list)  # URLs de páginas de carreira
     linkedin: bool = False
     linkedin_local: str = "Brasil"

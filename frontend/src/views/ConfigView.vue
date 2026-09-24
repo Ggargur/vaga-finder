@@ -122,7 +122,7 @@ async function enviarTeste() {
           </span>
         </label>
       </div>
-      <div class="grid gap-4 md:grid-cols-3">
+      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <CampoLista
           v-model="cfg.fontes.greenhouse"
           rotulo="Empresas no Greenhouse"
@@ -138,11 +138,18 @@ async function enviarTeste() {
           ajuda="O slug da URL jobs.lever.co/<slug>."
         />
         <CampoLista
+          v-model="cfg.fontes.ashby"
+          rotulo="Empresas no Ashby"
+          :linhas="4"
+          placeholder="nubank"
+          ajuda="O slug da URL jobs.ashbyhq.com/<slug>."
+        />
+        <CampoLista
           v-model="cfg.fontes.paginas"
           rotulo="Páginas de carreira"
           :linhas="4"
           placeholder="https://empresa.com/carreiras"
-          ajuda="Qualquer página que liste vagas."
+          ajuda="Se a página usar Greenhouse, Lever ou Ashby, o vaga-finder usa a API deles."
         />
       </div>
       <div class="rounded-lg border border-atencao/40 bg-atencao-suave p-4 text-sm">
