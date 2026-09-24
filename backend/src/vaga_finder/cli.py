@@ -60,3 +60,23 @@ def rodar() -> None:
     from .pipeline import rodar as rodar_tudo
 
     _imprimir(rodar_tudo(_banco(), carregar_config(), obter_llm(), _progresso))
+
+
+@app.command()
+def sincronizar(dias: int = typer.Option(365, help="Quantos dias da pasta Enviados importar")) -> None:
+    """Importa candidaturas da pasta Enviados do Gmail para o histórico."""
+    from .historico import sincronizar_gmail
+
+    _imprimir(sincronizar_gmail(_banco(), ambiente(), dias, _progresso))
+
+
+@app.command()
+def serve(
+    porta: int = typer.Option(8000, "--porta", "-p"),
+    reload: bool = typer.Option(False, "--reload", help="Recarrega ao editar o código (desenvolvimento)"),
+) -> None:
+    """Sobe a interface web em http://127.0.0.1:PORTA."""
+    import uvicorn
+
+    typer.echo(f"vaga-finder em http://127.0.0.1:{porta}")
+    uvicorn.run("vaga_finder.api.main:app", factory=True, host="127.0.0.1", port=porta, reload=reload)
