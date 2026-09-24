@@ -18,3 +18,6 @@ frontend/dist/
 # editores
 .vscode/
 .idea/
+
+# preferências pessoais (gerado com valores padrão na primeira execução)
+backend/config.yaml

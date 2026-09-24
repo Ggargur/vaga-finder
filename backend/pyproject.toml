@@ -1,0 +1,36 @@
+[project]
+name = "vaga-finder"
+version = "0.1.0"
+description = "Busca vagas parecidas com o currículo e redige emails de candidatura com Claude"
+authors = [
+    { name = "Gabriel Gargur", email = "tavares.gargur@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi>=0.141.1",
+    "httpx>=0.28.1",
+    "pydantic>=2.13.5",
+    "pydantic-settings>=2.15.0",
+    "pypdf>=6.19.0",
+    "python-multipart>=0.0.32",
+    "pyyaml>=6.0.3",
+    "selectolax>=0.4.12",
+    "typer>=0.27.2",
+    "uvicorn[standard]>=0.53.0",
+]
+
+[project.scripts]
+vaga-finder = "vaga_finder.cli:app"
+
+[build-system]
+requires = ["uv_build>=0.9.7,<0.10.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "respx>=0.23.1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

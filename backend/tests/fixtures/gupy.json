@@ -1,0 +1,57 @@
+{
+ "data": [
+  {
+   "id": 12587229,
+   "companyId": 50527,
+   "name": "Desenvolvedor Python, Automação e Agentes de IA",
+   "description": "A FCamara está em busca de uma pessoa desenvolvedora de sistemas , automacoes e IA Agents para atuar em parceria com a empresa na área Bancária.Responsabilidades e atribuiçõesAtividades que o profissional irá exercer.· Discutir e buscar entender o levantamento dos requisitos, mapeamento de Processos com foco para automação de atividades para uso em Python ou IA;· Realizar reuniões e ou questionários, além de utilizar insumos existentes visando entender o contexto do negócio e respectivamente do processo· Alinhamento com o PO do time do cliente;· Implementação de automações de RPA usando plataforma Lowcode, Python e também outras linguagens como .NET, Java ou Scripts· Cenário de Testes para implementação das automações;· Adotar processo de Deployment para QA e PROD;· Criar e Manter as documentações, bem como as evidências de homologação e de aceitação atualizadas;· Monitoramento e Suporte dos Processos Robotizados;· Retroalimentar o time de projetos quanto a necessidade de adequação nas entregas visando atenuar ou evitar falhas em produção;· Seguir fluxo de Monitoramento e CriseRequisitos e qualificaçõesHard Skill:· Desejavel atuação com plataformas de automação robótica como Automation Anywhere , UIPATH, Blusprism, Bot City e outras· Experiencia em desenvolvimento de sistemas , usando linguagens como Python, Java , Microsoft ou outras- experiencias com ambientes Cloud, principalmente AWSDesejavel experiencias no uso de IA como apoio a desenvolvimento· Habilidade em estudar re",
+   "careerPageId": 117226,
+   "careerPageName": "VENHA SER #SANGUELARANJA 🧡🚀",
+   "careerPageLogo": "https://attachments.gupy.io/production/companies/50527/career/117226/images/2022-12-05_17-18_logo.png",
+   "careerPageUrl": "https://fcamara.gupy.io/eyJzb3VyY2UiOiJndXB5X3BvcnRhbCJ9",
+   "type": "vacancy_type_effective",
+   "publishedDate": "2026-09-24T17:27:01.519Z",
+   "applicationDeadline": "2026-11-23",
+   "isRemoteWork": false,
+   "city": "Belo Horizonte",
+   "state": "Minas Gerais",
+   "country": "Brasil",
+   "jobUrl": "https://fcamara.gupy.io/job/eyJqb2JJZCI6MTI1ODcyMjksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+   "badges": {
+    "friendlyBadge": true,
+    "isPWD": false
+   },
+   "workplaceType": "hybrid",
+   "disabilities": false,
+   "isConfidentialCareerPage": false,
+   "skills": []
+  },
+  {
+   "id": 12569979,
+   "companyId": 2142,
+   "name": "Desenvolvedor Full Stack (Python / Angular) - Rio de Janeiro, RJ ",
+   "description": "Se você está buscando uma oportunidade para ingressar no time Bagaggio, chegou sua hora!Buscamos profissionais versáteis, ambiciosos por conhecimento e inovação! A Bagaggio age para contribuir efetivamente com o seu crescimento, queremos que você seja protagonista do seu desenvolvimento e da sua carreira. Incentivamos ideias novas e a sua participação direta e ativa no nosso processo de expansão e mudança. Temos paixão em quem busca fazer a diferença!Entregaremos a melhor estrutura possível para agregar valor a sua carreira, com iniciativas sustentáveis e inovadoras para, juntos, começarmos a escrever seu futuro.Queremos crescer, ir cada vez mais longe e você pode e deve nos acompanhar neste caminho!&nbsp;E aí, acha que a vaga é para você? Não perca tempo e se candidate logo. Venha participar do nosso time e seja um integrante da nossa história! :)Responsabilidades e atribuiçõesDesenvolver e manter aplicações web utilizadas por áreas internas e parceiros da empresa;Criar, evoluir e manter APIs e serviços backend (principalmente em Python com FastAPI);Desenvolver interfaces web modernas;Implementar regras de negócio, integrações entre sistemas e automações de processos;Garantir qualidade de código, documentação, versionamento e outras boas práticas de desenvolvimento;Participar da definição de arquitetura de soluções e melhorias técnicas nos sistemas existentes;Trabalhar em conjunto com times de inteligência para entender necessidades e transformar demandas em soluções tecnoló",
+   "careerPageId": 3591,
+   "careerPageName": "BAGAGGIO",
+   "careerPageLogo": "https://attachments.gupy.io/production/companies/2142/career/3591/images/2024-10-16_19-46_companyLogoUrl.png",
+   "careerPageUrl": "https://bagaggio.gupy.io/eyJzb3VyY2UiOiJndXB5X3BvcnRhbCJ9",
+   "type": "vacancy_type_effective",
+   "publishedDate": "2026-09-23T14:19:25.049Z",
+   "applicationDeadline": "2026-11-22",
+   "isRemoteWork": false,
+   "city": "Rio de Janeiro",
+   "state": "Rio de Janeiro",
+   "country": "Brasil",
+   "jobUrl": "https://bagaggio.gupy.io/job/eyJqb2JJZCI6MTI1Njk5NzksInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+   "workplaceType": "hybrid",
+   "disabilities": false,
+   "isConfidentialCareerPage": false,
+   "skills": []
+  }
+ ],
+ "pagination": {
+  "total": 26,
+  "limit": 2,
+  "offset": 0
+ }
+}
