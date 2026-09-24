@@ -42,3 +42,21 @@ def buscar() -> None:
     from .coleta import coletar
 
     _imprimir(coletar(_banco(), carregar_config(), progresso=_progresso))
+
+
+@app.command()
+def avaliar(limite: int = typer.Option(None, help="Máximo de vagas novas a avaliar nesta rodada")) -> None:
+    """Dá nota às vagas novas e redige rascunhos para as que têm email."""
+    from .llm import obter_llm
+    from .pipeline import avaliar_e_redigir
+
+    _imprimir(avaliar_e_redigir(_banco(), carregar_config(), obter_llm(), _progresso, limite))
+
+
+@app.command()
+def rodar() -> None:
+    """Buscar + avaliar + redigir (para usar no cron)."""
+    from .llm import obter_llm
+    from .pipeline import rodar as rodar_tudo
+
+    _imprimir(rodar_tudo(_banco(), carregar_config(), obter_llm(), _progresso))
