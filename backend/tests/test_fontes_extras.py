@@ -127,12 +127,16 @@ def test_pagina_segue_links():
 
 def test_fontes_ativas_respeitam_config():
     cfg = Config()
-    assert [f.nome for f in fontes_ativas(cfg)] == ["gupy", "remotive", "remoteok", "himalayas"]
+    jogos = ["hitmarker", "remotegamejobs", "workwithindies", "ingamejob", "gamesindustry"]
+    assert [f.nome for f in fontes_ativas(cfg)] == ["gupy", "remotive", "remoteok", "himalayas"] + jogos
+    cfg.fontes.games = ["hitmarker", "nao-existe"]
     cfg.fontes.gupy = False
     cfg.fontes.greenhouse = ["gitlab"]
     cfg.fontes.ashby = ["nubank"]
     cfg.fontes.linkedin = True
-    assert [f.nome for f in fontes_ativas(cfg)] == ["remotive", "remoteok", "himalayas", "greenhouse", "ashby", "linkedin"]
+    assert [f.nome for f in fontes_ativas(cfg)] == [
+        "remotive", "remoteok", "himalayas", "greenhouse", "ashby", "hitmarker", "linkedin"
+    ]
 
 
 @respx.mock

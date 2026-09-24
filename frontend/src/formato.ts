@@ -33,6 +33,11 @@ const FONTES: Record<string, string> = {
   ashby: 'Ashby',
   pagina: 'Página de carreira',
   linkedin: 'LinkedIn',
+  hitmarker: 'Hitmarker',
+  remotegamejobs: 'Remote Game Jobs',
+  workwithindies: 'Work With Indies',
+  ingamejob: 'InGame Job',
+  gamesindustry: 'GamesIndustry.biz',
 }
 
 export function nomeFonte(fonte: string): string {

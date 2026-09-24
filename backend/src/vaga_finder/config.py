@@ -51,6 +51,10 @@ class ConfigFontes(BaseModel):
     lever: list[str] = Field(default_factory=list)  # slugs, ex.: "spotify"
     ashby: list[str] = Field(default_factory=list)  # slugs, ex.: "nubank"
     paginas: list[str] = Field(default_factory=list)  # URLs de páginas de carreira
+    # sites de vagas de games (chaves de fontes.games.QUADROS)
+    games: list[str] = Field(
+        default_factory=lambda: ["hitmarker", "remotegamejobs", "workwithindies", "ingamejob", "gamesindustry"]
+    )
     linkedin: bool = False
     linkedin_local: str = "Brasil"
 

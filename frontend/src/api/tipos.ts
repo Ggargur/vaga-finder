@@ -136,6 +136,7 @@ export interface Config {
     lever: string[]
     ashby: string[]
     paginas: string[]
+    games: string[]
     linkedin: boolean
     linkedin_local: string
   }
@@ -148,4 +149,9 @@ export interface Config {
     pausa_max_s: number
     anexar_curriculo: boolean
   }
+}
+
+export interface OpcoesConfig {
+  sites_games: { chave: string; nome: string; descricao: string; site: string }[]
+  estudios_games: Record<'greenhouse' | 'lever' | 'ashby', string[]>
 }

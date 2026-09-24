@@ -7,7 +7,7 @@ Nada é enviado sem a sua aprovação. O sistema também bloqueia reenvios: mesm
 ## Como funciona
 
 1. Você envia o PDF do currículo. O Claude extrai um perfil (skills, senioridade, cargos-alvo), que você pode editar.
-2. As fontes são consultadas: Gupy, Remotive, RemoteOK, Himalayas, Greenhouse, Lever e Ashby (por empresa), páginas de carreira que você listar e, se você ligar, LinkedIn.
+2. As fontes são consultadas: Gupy, Remotive, RemoteOK, Himalayas, sites de vagas de games (Hitmarker, Remote Game Jobs, Work With Indies, InGame Job, GamesIndustry.biz), Greenhouse, Lever e Ashby (por empresa), páginas de carreira que você listar e, se você ligar, LinkedIn.
 3. Um filtro por palavras-chave descarta o que não tem relação. O Claude dá nota de 0 a 100 ao resto.
 4. Vagas acima da nota mínima e com email publicado ganham um rascunho. O Claude escreve e depois revisa o texto com as regras do [stop-slop](https://hvpandya.com) para tirar os vícios de texto de IA.
 5. Na tela de revisão você edita, pede outra versão, rejeita ou aprova. Aprovou, sai pelo seu Gmail com o CV anexo.
@@ -62,6 +62,8 @@ Configuração em `backend/config.yaml` (também editável na tela Config).
 
 ## Sobre as fontes
 
+- **Sites de games**: Hitmarker (pelo sitemap), Remote Game Jobs (pelo RSS), Work With Indies (pela listagem), InGame Job e GamesIndustry.biz (pela busca do site). Cada site é lido com a pausa que o robots.txt dele pede, então o GamesIndustry.biz é lento (10s por página). Games Jobs Direct ficou de fora porque o robots.txt proíbe robôs, e o Gamejobs.co bloqueia o acesso. Use termos em inglês.
+- **Estúdios de games**: o botão "Adicionar estúdios de games" em Config inclui Riot, Epic, Wildlife, Roblox, Scopely, Bungie, Insomniac, Naughty Dog, Kabam, Jam City, Supercell, Voodoo e Believer.
 - **Greenhouse, Lever e Ashby** são os sistemas de recrutamento de muitas empresas de tecnologia. Informe o slug da empresa em Config (o trecho depois de `boards.greenhouse.io/`, `jobs.lever.co/` ou `jobs.ashbyhq.com/`).
 - **Páginas de carreira**: se a página linka para Greenhouse, Lever ou Ashby, o vaga-finder usa a API deles. Senão, lê os dados estruturados (JSON-LD) ou segue os links cujo texto bate com os seus termos de busca. Páginas montadas só com JavaScript não funcionam.
 - A maioria das vagas não publica email de contato. Essas vão para "Aplicar pelo link"; o sistema nunca inventa endereços.

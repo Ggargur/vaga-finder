@@ -1,6 +1,7 @@
 from ..config import Config
 from .ashby import Ashby
 from .base import Fonte
+from .games import QUADROS, SiteGames
 from .greenhouse import Greenhouse
 from .gupy import Gupy
 from .himalayas import Himalayas
@@ -30,6 +31,7 @@ def fontes_ativas(cfg: Config) -> list[Fonte]:
         ativas.append(Ashby(f.ashby))
     if f.paginas:
         ativas.append(PaginaGenerica(f.paginas))
+    ativas += [SiteGames(chave) for chave in f.games if chave in QUADROS]
     if f.linkedin:
         ativas.append(LinkedIn(f.linkedin_local))
     return ativas

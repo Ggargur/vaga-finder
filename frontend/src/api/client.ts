@@ -2,6 +2,7 @@ import type {
   Config,
   Envio,
   Estado,
+  OpcoesConfig,
   Perfil,
   RascunhoCompleto,
   Tarefa,
@@ -92,4 +93,5 @@ export const api = {
 
   config: () => req<Config>('GET', '/config'),
   salvarConfig: (c: Config) => req<Config>('PUT', '/config', c),
+  opcoesConfig: () => req<OpcoesConfig>('GET', '/config/opcoes'),
 }

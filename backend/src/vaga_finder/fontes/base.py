@@ -1,5 +1,6 @@
 """Base dos coletores. Cada fonte devolve `Vaga`s já com texto limpo e emails extraídos."""
 
+import html
 import time
 from typing import Protocol
 
@@ -60,8 +61,8 @@ def nova_vaga(
     return Vaga(
         fonte=fonte,
         id_fonte=str(id_fonte),
-        titulo=consertar_mojibake((titulo or "").strip()),
-        empresa=consertar_mojibake((empresa or "").strip()),
+        titulo=consertar_mojibake(html.unescape(titulo or "").strip()),
+        empresa=consertar_mojibake(html.unescape(empresa or "").strip()),
         url=url,
         descricao=texto,
         emails=extrair_emails(texto),
@@ -80,12 +81,16 @@ def sem_repetidas(vagas: list[Vaga]) -> list[Vaga]:
     return saida
 
 
-def casa_termos(vaga: Vaga, termos: list[str]) -> bool:
-    """Para fontes sem busca (Greenhouse, Lever, feed geral): todas as palavras de algum termo
-    aparecem no título ou na descrição."""
-    texto = f" {normalizar(vaga.titulo)} {normalizar(vaga.descricao)} "
+def texto_casa_termos(texto: str, termos: list[str]) -> bool:
+    """Todas as palavras de algum termo aparecem no texto (sem acento/pontuação)."""
+    texto = f" {normalizar(texto)} "
     for termo in termos:
         palavras = normalizar(termo).split()
         if palavras and all(f" {p} " in texto for p in palavras):
             return True
     return not termos
+
+
+def casa_termos(vaga: Vaga, termos: list[str]) -> bool:
+    """Para fontes sem busca (Greenhouse, Lever, feed geral): filtra por título e descrição."""
+    return texto_casa_termos(f"{vaga.titulo} {vaga.descricao}", termos)

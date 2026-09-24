@@ -59,7 +59,7 @@ def _objetos_jsonld(arvore: HTMLParser) -> list[dict]:
     objetos: list[dict] = []
     for script in arvore.css('script[type="application/ld+json"]'):
         try:
-            dados = json.loads(script.text(deep=True) or "null")
+            dados = json.loads(script.text(deep=True) or "null", strict=False)
         except json.JSONDecodeError:
             continue
         pilha = dados if isinstance(dados, list) else [dados]
@@ -71,6 +71,31 @@ def _objetos_jsonld(arvore: HTMLParser) -> list[dict]:
     return objetos
 
 
+def _texto_jsonld(valor) -> str:
+    """Campos do schema.org podem vir como texto, objeto ({"name": ...}) ou lista."""
+    if isinstance(valor, str):
+        return "" if valor.strip().lower() in ("null", "none") else valor.strip()
+    if isinstance(valor, list):
+        return ", ".join(t for t in map(_texto_jsonld, valor) if t)
+    if isinstance(valor, dict):
+        return _texto_jsonld(valor.get("name") or "")
+    return ""
+
+
+def _local_jsonld(local) -> str:
+    if isinstance(local, list):
+        return ", ".join(dict.fromkeys(t for t in map(_local_jsonld, local) if t))
+    if not isinstance(local, dict):
+        return _texto_jsonld(local)
+    endereco = local.get("address")
+    if not isinstance(endereco, dict):
+        return _texto_jsonld(endereco) or _texto_jsonld(local.get("name"))
+    for campo in ("addressLocality", "addressRegion", "addressCountry"):
+        if texto := _texto_jsonld(endereco.get(campo)):
+            return texto
+    return ""
+
+
 def vagas_jsonld(html: str, url: str, fonte: str = "pagina") -> list[Vaga]:
     arvore = HTMLParser(html)
     vagas = []
@@ -78,22 +103,16 @@ def vagas_jsonld(html: str, url: str, fonte: str = "pagina") -> list[Vaga]:
         tipo = o.get("@type")
         if tipo != "JobPosting" and not (isinstance(tipo, list) and "JobPosting" in tipo):
             continue
-        org = o.get("hiringOrganization") or {}
-        locais = o.get("jobLocation") or []
-        locais = locais if isinstance(locais, list) else [locais]
-        cidades = [
-            (l.get("address") or {}).get("addressLocality", "") for l in locais if isinstance(l, dict)
-        ]
-        link = o.get("url") or url
+        link = o.get("url") if isinstance(o.get("url"), str) else url
         vagas.append(
             nova_vaga(
                 fonte=fonte,
-                id_fonte=link if link != url else f"{url}#{o.get('title', '')}",
-                titulo=o.get("title", ""),
-                empresa=org.get("name", "") if isinstance(org, dict) else str(org),
+                id_fonte=link if link != url else f"{url}#{_texto_jsonld(o.get('title'))}",
+                titulo=_texto_jsonld(o.get("title")),
+                empresa=_texto_jsonld(o.get("hiringOrganization")),
                 url=link,
-                descricao=o.get("description", ""),
-                local=", ".join(c for c in cidades if c),
+                descricao=_texto_jsonld(o.get("description")),
+                local=_local_jsonld(o.get("jobLocation")),
                 remoto=o.get("jobLocationType") == "TELECOMMUTE" or None,
                 publicada_em=o.get("datePosted"),
             )
@@ -117,8 +136,8 @@ def links_de_vagas(html: str, url: str, termos: list[str]) -> list[tuple[str, st
     return saida
 
 
-def vaga_da_pagina(html: str, url: str, titulo_link: str, empresa_padrao: str) -> Vaga:
-    if achadas := vagas_jsonld(html, url):
+def vaga_da_pagina(html: str, url: str, titulo_link: str, empresa_padrao: str, fonte: str = "pagina") -> Vaga:
+    if achadas := vagas_jsonld(html, url, fonte):
         v = achadas[0]
         v.url, v.id_fonte = url, url
         v.empresa = v.empresa or empresa_padrao
@@ -129,7 +148,7 @@ def vaga_da_pagina(html: str, url: str, titulo_link: str, empresa_padrao: str) -
     h1 = arvore.css_first("h1")
     corpo = arvore.css_first("main") or arvore.css_first("article") or arvore.body
     return nova_vaga(
-        fonte="pagina",
+        fonte=fonte,
         id_fonte=url,
         titulo=(h1.text(deep=True).strip() if h1 else "") or titulo_link,
         empresa=empresa_padrao,

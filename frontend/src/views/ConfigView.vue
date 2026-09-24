@@ -2,13 +2,14 @@
 import { onMounted, ref } from 'vue'
 
 import { api } from '../api/client'
-import type { Config } from '../api/tipos'
+import type { Config, OpcoesConfig } from '../api/tipos'
 import CampoLista from '../components/CampoLista.vue'
 import { avisar, tentar } from '../composables/toast'
 import { useApp } from '../stores/app'
 
 const app = useApp()
 const cfg = ref<Config | null>(null)
+const opcoes = ref<OpcoesConfig | null>(null)
 const salvando = ref(false)
 const testando = ref(false)
 
@@ -26,8 +27,28 @@ const FONTES_SIMPLES = [
 ] as const
 
 onMounted(async () => {
-  cfg.value = (await tentar(() => api.config())) ?? null
+  const [c, o] = await Promise.all([tentar(() => api.config()), tentar(() => api.opcoesConfig())])
+  cfg.value = c ?? null
+  opcoes.value = o ?? null
 })
+
+function alternarSiteGames(chave: string, ligado: boolean) {
+  if (!cfg.value) return
+  const lista = cfg.value.fontes.games.filter((c) => c !== chave)
+  cfg.value.fontes.games = ligado ? [...lista, chave] : lista
+}
+
+function adicionarEstudios() {
+  if (!cfg.value || !opcoes.value) return
+  let novos = 0
+  for (const ats of ['greenhouse', 'lever', 'ashby'] as const) {
+    const atual = cfg.value.fontes[ats]
+    const extras = opcoes.value.estudios_games[ats].filter((s) => !atual.includes(s))
+    novos += extras.length
+    cfg.value.fontes[ats] = [...atual, ...extras]
+  }
+  avisar(novos ? `${novos} estúdios adicionados. Clique em Salvar.` : 'Os estúdios já estavam na lista.', 'info')
+}
 
 async function salvar() {
   if (!cfg.value) return
@@ -121,6 +142,38 @@ async function enviarTeste() {
             <span class="text-texto-2">{{ f.desc }}</span>
           </span>
         </label>
+      </div>
+      <div v-if="opcoes" class="space-y-3 border-t border-borda pt-4">
+        <h3 class="text-sm font-medium">Sites de vagas de games</h3>
+        <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <label
+            v-for="site in opcoes.sites_games"
+            :key="site.chave"
+            class="flex gap-3 rounded-lg border border-borda p-3 text-sm"
+          >
+            <input
+              type="checkbox"
+              class="mt-0.5 h-4 w-4 accent-[var(--marca)]"
+              :checked="cfg.fontes.games.includes(site.chave)"
+              @change="alternarSiteGames(site.chave, ($event.target as HTMLInputElement).checked)"
+            />
+            <span>
+              <span class="block font-medium">{{ site.nome }}</span>
+              <span class="text-texto-2">{{ site.descricao }}</span>
+            </span>
+          </label>
+        </div>
+        <p class="text-xs text-texto-2">
+          Esses sites são lidos com pausa entre as páginas, como pede o robots.txt de cada um. Use termos em inglês
+          (unity, gameplay programmer), porque as vagas estão quase todas em inglês.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-2 border-t border-borda pt-4">
+        <h3 class="text-sm font-medium">Empresas por sistema de recrutamento</h3>
+        <button v-if="opcoes" class="botao pequeno" @click="adicionarEstudios">
+          Adicionar estúdios de games
+        </button>
       </div>
       <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <CampoLista
